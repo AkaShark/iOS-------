@@ -40,10 +40,15 @@
 //// methodForSelector返回一个IMP 方法实现
 //    function methodToCall = (function)[target methodForSelector:selector];
 //    methodToCall(target, selector, @"哦哦", [NSDate date]);
-    
+//    获得SEL
     SEL selector = @selector(testFunc1:Time:);
+//    定义函数指针
     void (*function)(id, SEL, NSString *, NSDate *) = (void (*)(id, SEL, NSString *, NSDate *))objc_msgSend;
     function(self,selector,@"giao",[NSDate date]);
+    
+    SEL selector1 = @selector(testFunc2:Str2:Str3:);
+    void (*func)(id, SEL, NSString *, NSString *, NSString *) = (void (*)(id, SEL, NSString *, NSString *, NSString *))objc_msgSend;
+    func(self,selector1,@"11",@"22",@"33");
     
 }
 
@@ -55,8 +60,11 @@
 - (void)testFunc2:(NSString *)str1
              Str2:(NSString *)str2
              Str3:(NSString *)str3 {
-    
+    NSLog(@"%@---%@---%@", str1, str2, str3);
 }
+
+
+//  参考: https://juejin.im/post/5d1e9f7de51d45777621bbed
 
 
 @end
